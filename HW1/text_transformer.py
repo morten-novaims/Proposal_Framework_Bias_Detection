@@ -5,6 +5,7 @@ import string
 import re
 nltk.download("punkt")
 #nltk.download("wordnet")
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.stem import PorterStemmer
@@ -21,7 +22,7 @@ def tokenizer(text):
 #  digits stay as they are
 #  the method takes a tokenized list as an input
 def normalizer(token_list):
-    output_list = [token for token in token_list 
+    output_list = [token.lower() for token in token_list 
                                 if token not in string.punctuation and 
                                 token != " " and
                                 token not in stopwords.words("english")]
@@ -31,13 +32,13 @@ def normalizer(token_list):
 #  remove any inflectional endings or variant forms
 #  example: am, are, is -> be
 def lemmatizer(token_list):
-    return [wordnet_lemmatizer.lemmatize(token) for token in token_list]
+    return [WordNetLemmatizer().lemmatize(token) for token in token_list]
 
 ## Stemmer
 #  removes all affixes from stem
 #  example: revival -> revive; operator -> operate
 def stemmer(token_list):
-    return [porter_stemmer.stem(token) for token in token_list]
+    return [PorterStemmer().stem(token) for token in token_list]
 
 ## Undigitizer
 #  change all digits to the word digit
