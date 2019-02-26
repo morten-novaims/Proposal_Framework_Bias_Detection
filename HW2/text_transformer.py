@@ -52,7 +52,6 @@ def undigitizer(token_list):
 #  counts the frequencies of unique words and returns a sorted list
 #  this is neccessary for the bag of words approach
 def count_frequencies(token_list):
-    token_dict = {}
     return [(token, token_list.count(token)) for token in set(token_list) ]
 
 ## Flattener
