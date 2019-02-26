@@ -59,4 +59,8 @@ def count_frequencies(token_list):
 #  for all preprocessing tasks we want lists of strings
 #  this function transforms list in lists into this type
 def flatten(word_list):
-    return [word for sentence in word_list for word in sentence]
+    for word in word_list:
+        if type(word) is list:
+            yield from flatten(word)
+        else:
+            yield word
