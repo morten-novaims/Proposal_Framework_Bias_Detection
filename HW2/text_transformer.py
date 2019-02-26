@@ -4,7 +4,7 @@ import nltk
 import string
 import re
 nltk.download("punkt")
-#nltk.download("wordnet")
+nltk.download("wordnet")
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -51,20 +51,12 @@ def undigitizer(token_list):
 ## Count Frequencies
 #  counts the frequencies of unique words and returns a sorted list
 #  this is neccessary for the bag of words approach
-""" def count_frequencies(token_list):
-    if any(isinstance(el, str) for el in token_list):
-        return [nltk.FreqDist(token_list)[token] for token in nltk.FreqDist(token_list)]
-    elif any(isinstance(el, list) for el in token_list):
-        flatten = [element for token in token_list for element in token] """
+def count_frequencies(token_list):
+    token_dict = {}
+    return [(token, token_list.count(token)) for token in set(token_list) ]
 
 ## Flattener
 #  for all preprocessing tasks we want lists of strings
 #  this function transforms list in lists into this type
-""" def flatten (word_list):
-    if any(isinstance(el, list) for el in word_list):
-        flatten_list = [element for sub_list in word_list for element in sub_list]
-        return flatten_list
-    elif any(isinstance(el, str) for el in word_list):
-        return word_list
-    else:
-        print("Something's wrong") """
+def flatten(word_list):
+    return [word for sentence in word_list for word in sentence]
