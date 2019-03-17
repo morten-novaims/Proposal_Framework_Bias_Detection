@@ -32,15 +32,20 @@ class HMM():
 
         # Normalize the initial counts.
         #TODO: compute self.initial_probs
+        # idea: just divide each value by the sum of the counts
+        self._init_probs = np.true_divide(self._init_counts, self._init_counts.sum())
 
         # Normalize transition counts
         #TODO: compute self.transition_probs
+        self._transition_probs = np.true_divide(self._transition_counts, self._transition_counts.sum())
 
         # Normalize final counts
         #TODO: compute self.final_probs
+        self._final_probs = np.true_divide(self._final_counts, self._final_counts.sum())
 
         # Normalize emission counts
-        #TODO: compute self.initial_probs
+        #TODO: compute self.emission_probs
+        self._emission_probs = np.true_divide(self._emission_counts, self._emission_counts.sum())
 
         return
 
@@ -49,16 +54,16 @@ class HMM():
         num_states = self._K # Number of states of the HMM.
 
         # Initial position.
-        initial_scores = np.log(self.initial_probs)
+        initial_scores = np.log(self._init_probs)
 
         # Intermediate position.
         emission_scores = np.zeros([length, num_states]) + logzero()
         for pos in range(length):
-            emission_scores[pos, :] = np.log(self.emission_probs[sequence.x[pos], :])
-        transition_scores = np.log(self.transition_probs)
+            emission_scores[pos, :] = np.log(self._emission_probs[sequence.x[pos], :])
+        transition_scores = np.log(self._transition_probs)
 
         # Final position.
-        final_scores = np.log(self.final_probs)
+        final_scores = np.log(self._final_probs)
 
         return initial_scores, transition_scores, final_scores, emission_scores
 

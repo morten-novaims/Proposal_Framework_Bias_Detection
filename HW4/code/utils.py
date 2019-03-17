@@ -76,3 +76,4 @@ class Seq():
 
     def copy(self):
         return Seq(deepcopy(self._words), deepcopy(self._labels))
+

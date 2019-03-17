@@ -59,8 +59,18 @@ class Viterbi():
 
         #TODO: implement the algorithm here!!
 
+        for i in range(1, length):              # loop over all sentences
+            for state in range(num_states):         # loop over all states/labels
+                # get the max value of all transition scores of states
+                p_trans = transition_scores[state, :] + viterbi_scores[i-1, :]
+                viterbi_scores[i, state] = np.max(p_trans) + emission_scores[i, state]
+                # get the backtrack path
+                viterbi_paths[i, state] = np.argmax(p_trans)
+
         # Termination: viterbi(N + 1, stop)
-        best_score = np.max(viterbi_scores[length - 1, :] + final_scores)
+        list_final_scores = viterbi_scores[length - 1, :] + final_scores
+        best_score = np.max(list_final_scores)
+        best_path = viterbi_paths[:, (np.argmax(list_final_scores))]
         return best_path, best_score
 
 
@@ -75,6 +85,7 @@ class SequenceClassifier():
         by running the Viterbi algorithm."""
 
         # Compute scores given the observation sequence.
+        # basically apply np.log to the probs - more or less
         initial_scores, transition_scores, final_scores, emission_scores = \
             self._model.compute_scores(sequence)
 
@@ -85,7 +96,7 @@ class SequenceClassifier():
                                                             emission_scores)
 
         predicted_sequence = sequence.copy()
-        predicted_sequence.y = best_states
+        predicted_sequence._labels = best_states # a better way would be to code it through properties, this also works
         return predicted_sequence, total_score
 
     def decode_corpus(self, dataset):
@@ -128,7 +139,7 @@ if __name__ == "__main__":
     hmm.train_supervised(train_data, smoothing=1e-10)
     print("done training")
     #now you can check what are the probabilities, init, transition, emission, and final
-    embed()
+#    embed()
     seq_classifier = SequenceClassifier(model=hmm, decoder=Viterbi())
 
     train_predictions = seq_classifier.decode_corpus(train_data)
@@ -140,4 +151,4 @@ if __name__ == "__main__":
     print("testing accuracy: {}".format(test_acc))
 
 
-    embed()
+#    embed()
