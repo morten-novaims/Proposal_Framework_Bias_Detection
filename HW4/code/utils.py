@@ -42,7 +42,7 @@ class stringdict():
 
     @property
     def dict(self):
-        return self._wdict
+        return self._wdict  
 
     @property
     def names(self):
