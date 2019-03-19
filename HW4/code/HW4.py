@@ -1,5 +1,5 @@
 import numpy as np
-from IPython import embed
+#from IPython import embed
 from utils import *
 from HMM import HMM
 
@@ -55,22 +55,26 @@ class Viterbi():
         best_path = -np.ones(length, dtype=int)
 
         #  Initialize the viterbi scores: viterbi(1, c_k )
-        viterbi_scores[0, :] = emission_scores[0, :] + initial_scores
+        viterbi_scores[0, :] = np.max(emission_scores[0, :] + initial_scores) 
 
         #TODO: implement the algorithm here!!
 
         for i in range(1, length):              # loop over all sentences
             for state in range(num_states):         # loop over all states/labels
                 # get the max value of all transition scores of states
-                p_trans = transition_scores[state, :] + viterbi_scores[i-1, :]
-                viterbi_scores[i, state] = np.max(p_trans) + emission_scores[i, state]
+                p_trans = transition_scores[state] + viterbi_scores[i-1]
+                viterbi_scores[i, state] = np.max(p_trans) + emission_scores[i, :][state]
                 # get the backtrack path
                 viterbi_paths[i, state] = np.argmax(p_trans)
 
         # Termination: viterbi(N + 1, stop)
-        list_final_scores = viterbi_scores[length - 1, :] + final_scores
-        best_score = np.max(list_final_scores)
-        best_path = viterbi_paths[:, (np.argmax(list_final_scores))]
+        best_score = np.max(viterbi_scores[length - 1] + final_scores)   
+
+        ## Back track
+        best_path[length-1] = np.argmax(viterbi_scores[length - 1] + final_scores)
+        for i in range(length-2, 0, -1):
+            best_path[i] = viterbi_paths[i+1, best_path[i+1]] 
+
         return best_path, best_score
 
 
@@ -128,10 +132,10 @@ class SequenceClassifier():
 
 if __name__ == "__main__":
     datasetpath = "CONLL2003/"
-    train_data, dV, dL = read_conll(datasetpath + "train.txt")
+    train_data, dV, dL = read_conll("/home/xhockware/Uni/text-mining/Text_Mining_HW/HW4/code/CONLL2003/train.txt")
     dV.freeze()
     dL.freeze()
-    test_data,_,_ = read_conll(datasetpath + "test.txt", word_vocab=dV, label_vocab=dL)
+    test_data,_,_ = read_conll("/home/xhockware/Uni/text-mining/Text_Mining_HW/HW4/code/CONLL2003/test.txt", word_vocab=dV, label_vocab=dL)
 
 
     #train the model with the dataset supervisedly
