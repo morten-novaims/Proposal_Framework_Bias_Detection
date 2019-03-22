@@ -21,13 +21,14 @@ def tokenizer(text):
 #  remove all stopwords based on this library:
 #  digits stay as they are
 #  the method takes a tokenized list as an input
-def normalizer(token_list):
+def normalizer(token_list, add_words=[]):
     punct = "\{}".format("|\\".join(string.punctuation))
     output_list = [token.lower() for token in token_list 
                                 if token not in string.punctuation and 
                                 not re.search( r'{} +'.format(punct), token) and
                                 token != " " and
-                                token not in stopwords.words("english")]
+                                token.lower() not in stopwords.words("english") and
+				                token.lower() not in add_words]
     return output_list
 
 ## Lemmatizer
