@@ -34,7 +34,7 @@ def preprocessing(directory, verbose=False, remove_words=[], stemming=False, lem
         articles.append(article)
     
     if verbose:
-        print("Dropped: "+ str(round((len(articles) / len(article_list))*100, 2))+ " %")
-        print("Dropped: "+ str(len(articles))+ "/"+str(len(article_list)))
+        print("Articles used: "+ str(round((len(articles) / len(article_list))*100, 2))+ " %")
+        print("Articles used: "+ str(len(articles))+ "/"+str(len(article_list)))
         
     return articles, corpus
