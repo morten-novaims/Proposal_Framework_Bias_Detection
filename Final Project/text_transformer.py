@@ -9,6 +9,8 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.stem import PorterStemmer
+import os
+import pickle
 
 ## Tokenizer
 #  This tokenizer returns the text split into every single word
@@ -64,3 +66,80 @@ def flatten(word_list):
             yield from flatten(word)
         else:
             yield word
+
+## Check words
+#  check if words are in a corpus
+#  used for filtering news articles
+def check_words(word_list, corpus, method):
+#""" This function checks for a string list of words if they are in the corpus. The corpus needs to be an untokenized single string. The default method is any. If all words need to be in the corpus the argument "all" needs to be passed."""
+    if method(word in corpus for word in word_list):
+        return True
+    else:
+        return False
+
+# check if the len of the article is below 300
+def check_len(article_text):
+    if len(article_text) < 300:
+        return True
+    else:
+        return False
+
+
+## Preprocessing Pipeline
+def preprocessing(directory, verbose=False, remove_words=[], filter_words =[], filter_method=any, stemming=False, lemmatizing=False):
+    """ Returns the preprocessing pipeline utilizing the text_transformer package.
+    Additionally words can be passed, that should be removed. Furthermore, words can be passed, which have to be in the article (Filter).
+    Returns corpus and dictionary. """
+
+    article_list = os.listdir(directory)
+
+    articles = []
+    corpus = []
+    count_len = 0
+    count_filter = 0
+
+    for i, article_name in enumerate(article_list):
+        article = pickle.load( open("articles/"+article_name, "rb" ) )
+        
+        if i%1000 == 0:
+            if verbose:
+                print("We're at "+ str(round(i/len(article_list)*100,2))+ "% of the data.")
+
+        # remove all articles shorter than 300 characters
+        if check_len(article["text"]):
+            count_len += 1 
+            continue
+
+        # apply the filtering of words
+        if len(filter_words) > 0:   # check if argument was passed
+            if check_words(filter_words, article["text"], filter_method) == False:
+#                print(check_words(filter_words, article["text"], filter_method))
+#                print(article["text"])
+                count_filter += 1
+                continue
+           
+        # tokenize the text
+        token_list = tokenizer(article["text"])
+
+        # normalize the text
+        token_list = normalizer(token_list, remove_words)
+
+        # apply stemming if needed
+        if stemming:
+            token_list = stemmer(token_list)
+
+        # apply lemmatizing if needed
+        if lemmatizing:
+            token_list = lemmatizer(token_list)
+
+        corpus.append(token_list)
+        articles.append(article)
+    
+    if verbose:
+        print("Articles used: "+ str(round((len(articles) / len(article_list))*100, 2))+ " %")
+        print("Articles used: "+ str(len(articles))+ "/"+str(len(article_list)))
+        print("*" *45)
+        print(count_len, " (", round(count_len/len(article_list)*100, 2), "%) Articles were filtered out because of length and")
+        print(count_filter," (", round(count_filter/len(article_list)*100, 2), "%) Articles were filtered out because of the filter words.")
+        
+    return articles, corpus
