@@ -11,7 +11,10 @@
 *.cb
 *.cb2
 .*.lb
-
+*.nav
+*.snm
+*.synctex.gz
+*.fdb_latexmk
 ## python
 
 MANIFEST
