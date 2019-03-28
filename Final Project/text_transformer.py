@@ -3,6 +3,7 @@
 import nltk
 import string
 import re
+import langdetect
 nltk.download("punkt")
 nltk.download("wordnet")
 nltk.download('stopwords')
@@ -83,10 +84,24 @@ def check_len(article_text):
         return True
     else:
         return False
+    
+# check if the article is of a particular language
+def check_lang(article_text, lang):
+    if langdetect.detect(article_text) != lang:
+        return True
+    else:
+        return False
 
+# check if the url is of an article or other thing like comments section, video, discussion, etc...
+def check_not_news_url(article_url):
+    if any(word in article_url for word in ["#comment","#video"]):
+        return True
+    else:
+        return False
 
 ## Preprocessing Pipeline
-def preprocessing(directory, verbose=False, remove_words=[], filter_words =[], filter_method=any, stemming=False, lemmatizing=False):
+def preprocessing(directory, verbose=False, remove_words=[], filter_words =[], 
+                  filter_method=any, stemming=False, lemmatizing=False, lang='en'):
     """ Returns the preprocessing pipeline utilizing the text_transformer package.
     Additionally words can be passed, that should be removed. Furthermore, words can be passed, which have to be in the article (Filter).
     Returns corpus and dictionary. """
@@ -109,7 +124,12 @@ def preprocessing(directory, verbose=False, remove_words=[], filter_words =[], f
         if check_len(article["text"]):
             count_len += 1 
             continue
-
+           
+        # remove all articles not of lang
+        if check_not_news_url(article["url"]):
+            count_len += 1 
+            continue    
+            
         # apply the filtering of words
         if len(filter_words) > 0:   # check if argument was passed
             if check_words(filter_words, article["text"], filter_method) == False:
@@ -117,7 +137,12 @@ def preprocessing(directory, verbose=False, remove_words=[], filter_words =[], f
 #                print(article["text"])
                 count_filter += 1
                 continue
-           
+        
+        # remove all articles not of lang
+        if check_lang(article["text"], lang):
+            count_len += 1 
+            continue    
+
         # tokenize the text
         token_list = tokenizer(article["text"])
 
@@ -139,7 +164,7 @@ def preprocessing(directory, verbose=False, remove_words=[], filter_words =[], f
         print("Articles used: "+ str(round((len(articles) / len(article_list))*100, 2))+ " %")
         print("Articles used: "+ str(len(articles))+ "/"+str(len(article_list)))
         print("*" *45)
-        print(count_len, " (", round(count_len/len(article_list)*100, 2), "%) Articles were filtered out because of length and")
+        print(count_len, " (", round(count_len/len(article_list)*100, 2), "%) Articles were filtered out because of length and language")
         print(count_filter," (", round(count_filter/len(article_list)*100, 2), "%) Articles were filtered out because of the filter words.")
         
     return articles, corpus
