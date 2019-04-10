@@ -133,8 +133,6 @@ def preprocessing(directory, verbose=False, remove_words=[], filter_words =[],
         # apply the filtering of words
         if len(filter_words) > 0:   # check if argument was passed
             if check_words(filter_words, article["text"], filter_method) == False:
-#                print(check_words(filter_words, article["text"], filter_method))
-#                print(article["text"])
                 count_filter += 1
                 continue
         
