@@ -118,31 +118,13 @@ This project contributes to the detection of fake news by analysing bias in engl
 
 \begin{block}{Motivation {\emoji[ios]{1F4AA}}}
 
-    The motivation from this project lays in the recent untrustworthiness of the media :
+    The motivation from this project lays in the recent doubts on media neutrality. People tend to distrust the media and call serious newspapers "fake news", whereas dubious newspapers gain popularity. So this project aims to provide the following:
     \begin{itemize}
-    \item mollis dignissim, magna augue tincidunt dolor, interdum vestibulum urna
-    \item Sed aliquet luctus lectus, eget aliquet leo ullamcorper consequat. Vivamus eros sem, iaculis ut euismod non, sollicitudin vel orci.
-    \item Nascetur ridiculus mus.  
-    \item Euismod non erat. Nam ultricies pellentesque nunc, ultrices volutpat nisl ultrices a.
+    \item provide a measure for biasness and tendentious media coverage
+    \item create transparency which newspapers tend to publish more tendentious articles
+    \item initial notions towards an automated biasness detection in media coverage
     \end{itemize}
 
-    \end{block}
-
-
-%----------------------------------------------------------------------------------------
-%	Objectives
-%----------------------------------------------------------------------------------------
-
-\begin{block}{Objectives!!!}
-
-    Lorem  ipsum dolor sit amet, consectetur, nunc tellus pulvinar tortor, commodo eleifend risus arcu sed odio:
-    \begin{itemize}
-    \item mollis dignissim, magna augue tincidunt dolor, interdum vestibulum urna
-    \item Sed aliquet luctus lectus, eget aliquet leo ullamcorper consequat. Vivamus eros sem, iaculis ut euismod non, sollicitudin vel orci.
-    \item Nascetur ridiculus mus.  
-    \item Euismod non erat. Nam ultricies pellentesque nunc, ultrices volutpat nisl ultrices a.
-    \end{itemize}
-    
     \end{block}
 
 %----------------------------------------------------------------------------------------
@@ -151,21 +133,11 @@ This project contributes to the detection of fake news by analysing bias in engl
 
 \begin{block}{Methods}
 
-    Lorem ipsum dolor \textbf{sit amet}, Nullam lectus tortor, \textit{consequat tempor hendrerit} quis, vestibulum in diam. Maecenas sed diam augue.
+The methodology followed in this project is as followed: As a first step data was aquiered from a \textbf{web scrapping} aproach from which news articles are downloaded from the web representations of various well-known newspapers. The data was limited to the politics section of each newspaper. It was tried to pick a balanced selection of different politically located newspapers through a qualitative assessment.
+These articles were then filtered on keywords [e.g. "Trump", "Syria", "Brexit"] and been used to train a \textbf{LDA} model for topic detection. Simultaniously a \textbf{sentiment analysis} was carried out to measure the tendentious nature of each article. "A sentence on how it was done"
+Finally the results of both analysis were mapped and visualised in an interactive scatterplot. 
+\end{block}
     
-    This statement requires citation.
-    
-    \end{block}
-    
-    %------------------------------------------------
-    
-    \begin{itemize}
-        \item Curabitur \textbf{15.3} pellentesque dignissim
-        \item Eu facilisis est tempus quis
-        \item Duis porta consequat \textbf{0.34} lorem
-        \item Eu facilisis est tempus quis
-        \end{itemize}
-
 %----------------------------------------------------------------------------------------
 
 \end{column} % End of the first column
