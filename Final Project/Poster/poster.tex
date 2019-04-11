@@ -64,7 +64,7 @@
 %	TITLE SECTION 
 %----------------------------------------------------------------------------------------
 
-\title{Analysis of Bias Detection for English Newspapers {\emoji[ios]{1F4F0}}} % Poster title
+\title{A Proposed Framework for Acessing Bias on English Newspapers {\emoji[ios]{1F4F0}}} % Poster title
 
 \author{Curado, Antonio  {\emoji[ios]{1F9E0}}  Dahl, Morten} % Author(s)
 
@@ -235,7 +235,7 @@ Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sol
 \begin{column}{\twocolwid} % The third column
 
 %----------------------------------------------------------------------------------------
-%	CONCLUSION
+%	TRUMP
 %----------------------------------------------------------------------------------------
 
 \begin{block}{Trump}
@@ -252,7 +252,7 @@ Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sol
 \end{block}
 
 %----------------------------------------------------------------------------------------
-%	ADDITIONAL INFORMATION
+%	BREXIT
 %----------------------------------------------------------------------------------------
 
 \begin{block}{Brexit}
@@ -270,11 +270,11 @@ Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sol
 \end{block}
 
 %----------------------------------------------------------------------------------------
-%	REFERENCES
+%	SYRIA
 %----------------------------------------------------------------------------------------
 
 \begin{block}{Syria}
-    \begin{columns}[onlytextwidth]
+    \begin{columns}
         \begin{column}{.45\textwidth}
             \includegraphics[width=0.8\linewidth]{log_extraction.png} 
         \end{column}
@@ -285,32 +285,44 @@ Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sol
 \end{block}
 
 %----------------------------------------------------------------------------------------
-%	FUTURE WORK
+%	FUTURE WORK & Conclusion
 %----------------------------------------------------------------------------------------
+
+\begin{block}{Conclusion {\emoji[ios]{1F64F}}}
+    Measuring bias is a very subjective task. 
+    Usually computers have a hard time executing subjective tasks. 
+    The framework developed does not aim to automate bias detection but 
+    rather to empower humans with summarization capabilites otherwise not possible.
+    From the three example analysis above shown, it is possible to validate the usefullness of the framework proposed on a hard topic as bias detection.
+    As news generation gets automated, as is the case of fakenews(needs reference), the methods of flaging them also require modern digital frameworks.
+    This analysis and framework takes another step in this direction.
+
+\end{block}
+
 
 \begin{block}{Future Work {\emoji[ios]{1F64F}}}
 
-    \small{\rmfamily{Nam mollis tristique neque eu luctus. Suspendisse rutrum congue nisi sed convallis. Aenean id neque dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.}} \\
-    
-\end{block}
+    As previously mentioned this project aims to set a staring framework for discusion on automated detection of bias. 
+    As so there is much further work to be done, mainly on 5 different areas:
 
-%----------------------------------------------------------------------------------------
-%	ACKNOWLEDGEMENTS
-%----------------------------------------------------------------------------------------
-
-\setbeamercolor{block title}{fg=red,bg=white} % Change the block title color
-
-\begin{block}{Acknowledgements {\emoji[ios]{1F64F}}}
-
-\small{\rmfamily{Nam mollis tristique neque eu luctus. Suspendisse rutrum congue nisi sed convallis. Aenean id neque dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.}} \\
+    \begin{itemize}
+        \item Increase the number of newspapers and find a method to select the same number of articles for each one
+        \item Extrapolate the work to different regions and languages
+        \item Automate topic detection 
+        \item Build a ML/Rule based algorithm to flag possible high bias on articles
+        \item Apply sliding window mechanimns to track changes in sentiment towards selected topics
+    \end{itemize}
 
 \end{block}
+
 
 %----------------------------------------------------------------------------------------
 %	REPO
 %----------------------------------------------------------------------------------------
 
 \begin{block}{ {\emoji[ios]{1F4BB}}}
+
+    The project was possible with the great work done in the newspaper3k, nltk and gensim python libraries
 
     \small{\rmfamily{All code can be easily accessed in \href{https://github.com/morten-novaims/Text_Mining_HW}{github.com/morten-novaims/Text\_Mining\_HW}}} \\
     
