@@ -1,30 +1,6 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Jacobs Landscape Poster
-% LaTeX Template
-% Version 1.0 (29/03/13)
-%
-% Created by:
-% Computational Physics and Biophysics Group, Jacobs University
-% https://teamwork.jacobs-university.de:8443/confluence/display/CoPandBiG/LaTeX+Poster
-% 
-% Further modified by:
-% Nathaniel Johnston (nathaniel@njohnston.ca)
-%
-% This template has been downloaded from:
-% http://www.LaTeXTemplates.com
-%
-% License:
-% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%----------------------------------------------------------------------------------------
-%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
-%----------------------------------------------------------------------------------------
-
 \documentclass[final]{beamer}
 
-\usepackage[scale=1.24]{beamerposter} % Use the beamerposter package for laying out the poster
+\usepackage[scale=1]{beamerposter} % Use the beamerposter package for laying out the poster
 
 \usetheme{confposter} % Use the confposter theme supplied with this template
 
@@ -59,14 +35,16 @@
 
 \usepackage{booktabs} % Top and bottom rules for tables
 
-\usepackage{emoji}% Emoji :D
+\usepackage{emoji} % Emoji :D
+
+\usepackage{subcaption} % 2 images side by side
 %-------------------------------------------s---------------------------------------------
 %	TITLE SECTION 
 %----------------------------------------------------------------------------------------
 
 \title{A Proposed Framework for Acessing Bias on English Newspapers {\emoji[ios]{1F4F0}}} % Poster title
 
-\author{Curado, Antonio  {\emoji[ios]{1F9E0}}  Dahl, Morten} % Author(s)
+\author{Curado, Antonio  \&  Dahl, Morten} % Author(s)
 
 \institute{Masters in Advanced Analytics @ Nova IMS} % Institution(s)
 
@@ -87,7 +65,7 @@
 
 \begin{document}
 
-\addtobeamertemplate{block end}{}{\vspace*{2ex}} % White space under blocks
+\addtobeamertemplate{block end}{}{\vspace*{2exs}} % White space under blocks
 \addtobeamertemplate{block alerted end}{}{\vspace*{2ex}} % White space under highlighted (alert) blocks
 
 \setlength{\belowcaptionskip}{2ex} % White space under figures
@@ -107,8 +85,7 @@
 %----------------------------------------------------------------------------------------
 
 \begin{block}{Abstract}
-This project contributes to the detection of fake news by analysing bias in english newspapers. These Articles are grouped by topic and been undertaken a sentiment analysis to detect the bias and tendencies within each article. It results in a visualization, which shows the media bias per newspaper, topic and keyword.
-
+    This project contributes to the detection of fake news by analysing bias in english newspapers. These Articles are grouped by topic and been undertaken a sentiment analysis to detect the bias and tendencies within each article. It results in a visualization, which shows the media bias per newspaper, topic and keyword.
 \end{block}
 
 
@@ -120,22 +97,21 @@ This project contributes to the detection of fake news by analysing bias in engl
 
     The motivation from this project lays in the recent doubts on media neutrality. People tend to distrust the media and call serious newspapers "fake news", whereas dubious newspapers gain popularity. So this project aims to provide the following:
     \begin{itemize}
-    \item provide a measure for biasness and tendentious media coverage
-    \item create transparency which newspapers tend to publish more tendentious articles
-    \item initial notions towards an automated biasness detection in media coverage
+        \item provide a measure for biasness and tendentious media coverage
+        \item create transparency which newspapers tend to publish more tendentious articles
+        \item initial notions towards an automated biasness detection in media coverage
     \end{itemize}
 
-    \end{block}
+\end{block}
 
 %----------------------------------------------------------------------------------------
 %	Methods
 %----------------------------------------------------------------------------------------
 
 \begin{block}{Methods}
-
-The methodology followed in this project is as followed: As a first step data was aquiered from a \textbf{web scrapping} aproach from which news articles are downloaded from the web representations of various well-known newspapers. The data was limited to the politics section of each newspaper. It was tried to pick a balanced selection of different politically located newspapers through a qualitative assessment.
-These articles were then filtered on keywords [e.g. "Trump", "Syria", "Brexit"] and been used to train a \textbf{LDA} model for topic detection. Simultaniously a \textbf{sentiment analysis} was carried out to measure the tendentious nature of each article. "A sentence on how it was done"
-Finally the results of both analysis were mapped and visualised in an interactive scatterplot. 
+    The methodology followed in this project is as followed: As a first step data was aquiered from a \textbf{web scrapping} aproach from which news articles are downloaded from the web representations of various well-known newspapers. The data was limited to the politics section of each newspaper. It was tried to pick a balanced selection of different politically located newspapers through a qualitative assessment.
+    These articles were then filtered on keywords [e.g. "Trump", "Syria", "Brexit"] and been used to train a \textbf{LDA} model for topic detection. Simultaniously a \textbf{sentiment analysis} was carried out to measure the tendentious nature of each article. "A sentence on how it was done"
+    Finally the results of both analysis were mapped and visualised in an interactive scatterplot. 
 \end{block}
     
 %----------------------------------------------------------------------------------------
@@ -153,18 +129,18 @@ Finally the results of both analysis were mapped and visualised in an interactiv
 
 \begin{block}{Data Extraction}
 
-As a way to make the analysis relevant and up to date with the most current news topics
-it has been developed a new news dataset with the following porperties
+    As a way to make the analysis relevant and up to date with the most current news topics
+    it has been developed a new news dataset with the following porperties
 
-\begin{itemize}
-\item Built a dataset with over \textbf{70.000} news articles
-\item Scraped over \textbf{19} newspapers for over \textbf{2} weeks
-\item With and average of \textbf{3.600} news articles per newspaper
-\end{itemize}
+    \begin{itemize}
+        \item Built a dataset with over \textbf{70.000} news articles
+        \item Scraped over \textbf{19} newspapers for over \textbf{2} weeks
+        \item With an average of \textbf{3.600} news articles per newspaper
+    \end{itemize}
 
-\hfill\includegraphics{log_extraction.png}\hspace*{\fill}
+    \hfill\includegraphics{log_extraction.png}\hspace*{\fill}
 
-The dataset was build only using the newspapers3k python package
+    The dataset was build only using the newspapers3k python package
 
 \end{block}
 
@@ -172,34 +148,24 @@ The dataset was build only using the newspapers3k python package
 %	MATHEMATICAL SECTION
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Dataset Properties}
+\begin{block}{LDA Analysis}
 
-Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin. Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin.
-  
-\begin{equation}
-E = mc^{2}
-\label{eqn:Einstein}
-\end{equation}
+    Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin. Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin.
+    
+    \begin{equation}
+    E = mc^{2}
+    \label{eqn:Einstein}
+    \end{equation}
+    \end{block}
 
-Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin. Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin.
+    \begin{block}{Sentiment Analysis}
 
-\begin{equation}
-\cos^3 \theta =\frac{1}{4}\cos\theta+\frac{3}{4}\cos 3\theta
-\label{eq:refname}
-\end{equation}
+        Another way to search for is to analyse the sentiment which each newspaper looks at a topic.
+        With a help of a word dictionary quantifiyng the polatiy of each word, the polarity for each article has been calculated.\cite{vader}
 
-Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin. Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin.
+    \end{block}
 
-\begin{equation}
-\kappa =\frac{\xi}{E_{\mathrm{max}}} %\mathbb{ZNR}
-\end{equation}
-
-\end{block}
-
-%----------------------------------------------------------------------------------------
-
-\end{column} % End of column 2
-
+\end{column} % End of the first column
 
 
 \begin{column}{\sepwid}\end{column} % Empty spacer column
@@ -248,15 +214,33 @@ Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sol
 \begin{block}{Syria}
     \begin{columns}
         \begin{column}{.45\textwidth}
-            \includegraphics[width=0.8\linewidth]{log_extraction.png} 
+            \begin{figure}
+                \centering
+                \begin{minipage}{.5\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{poster/syria_5_al.png}
+                \captionof{figure}{Al Jazeera}
+                \label{fig:test1}
+                \end{minipage}%
+                \begin{minipage}{.5\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{poster/syria_5_thetimes.png}
+                \captionof{figure}{The Times}
+                \label{fig:test2}
+                \end{minipage}
+            \end{figure}
         \end{column}
+
         \begin{column}{.55\textwidth}
-            Fusce quis massa dictum tortor \textbf{tincidunt mattis}. Donec quam est, lobortis quis pretium at, laoreet scelerisque lacus. Nam quis odio enim, in molestie libero. Vivamus cursus mi at \textit{nulla elementum sollicitudin}.
+            The two plots show how articles from the Al Jazeera and The Times newspapers compare to each other, on a positivity/negativity scale.
+            Both are measured on the topic 5 which contains as most frequent keywords:  \\
+            From this one could possibly infer that when Al Jazeera publishes on the topic, it takes more serious and possible more negative approach to it.\\
+            Never the less, these are only possible assumptions that the framework helps to clarify. Each article would be needed to be read in details to derive further conclusions
         \end{column}
     \end{columns}
 \end{block}
 
-%----------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------
 %	FUTURE WORK & Conclusion
 %----------------------------------------------------------------------------------------
 
@@ -293,7 +277,15 @@ Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sol
 %----------------------------------------------------------------------------------------
 
 \begin{block}{ {\emoji[ios]{1F4BB}}}
+    \begin{thebibliography}
 
+        \bibitem{vader}
+          Hutto, C.J. and Gilbert, Eric,
+          \emph{ A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text},
+          Proceedings of the 8th International Conference on Weblogs and Social Media, ICWSM 2014,
+          2015.
+    \end{thebibliography}
+    \vspace{8mm}
     The project was possible with the great work done in the newspaper3k, nltk and gensim python libraries
 
     \small{\rmfamily{All code can be easily accessed in \href{https://github.com/morten-novaims/Text_Mining_HW}{github.com/morten-novaims/Text\_Mining\_HW}}} \\
