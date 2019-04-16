@@ -63,7 +63,9 @@
 %• if you want and make the code publicly available write the link in the poster or QR code for people to use
 
 
-\begin{document}
+\begin{center}
+•
+\end{center}\begin{document}
 
 \addtobeamertemplate{block end}{}{\vspace*{2exs}} % White space under blocks
 \addtobeamertemplate{block alerted end}{}{\vspace*{2ex}} % White space under highlighted (alert) blocks
@@ -150,13 +152,29 @@
 
 \begin{block}{LDA Analysis}
 
-    Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin. Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin.
+    The LDA (Latent Dirichlet Allocation) analysis aims to detect topics within all articles. We trained a model for each partition of the dataset. The dataset was partitioned based on a specific keyword (e.g. Trump) in order to have a meaningful filter. Otherwise the dataset would be too big to analyse each detected topic. This algorithm takes three \textit{hyperparameters}: number of topics, alpha and eta. All of these parameters were finetuned for each of the three trained models. The coherence score served as a measure for this assessment. \linebreak
     
-    \begin{equation}
-    E = mc^{2}
-    \label{eqn:Einstein}
-    \end{equation}
-    \end{block}
+    \begin{table}    
+    \begin{tabular}{c c c c}
+    \hline
+    KeyWord & Topics & Alpha & Eta  \\ [0.5ex]
+    \hline\hline
+    "Trump" & 14 & 0.01 & 0.01 \\
+    "Brexit" & 6 & 0.01 & 0.01 \\
+    "Syria" & 6 & 0.6 & 0.2 \\
+    \end{tabular}
+    \caption{Parameters for LDA models}
+    \end{table}
+    
+     The result of this analysis is a mapping for each article in order to make them comparable. Each topic is represented as a concatination of words assigned with a probability. In the example topic shown below one can understand by examining the words, that the topic is about Trump and the wall to mexico. \linebreak
+     
+     \textit{0.033*"border" + 0.016*"mexico" + 0.016*"trump" \\
+    + 0.010*"immigration" + 0.008*"states" + 0.008*"united" \\
+    + 0.008*"president" + 0.007*"illegal" + 0.007*"migrants" \\
+    + 0.006*"people"}
+
+
+       \end{block}
 
     \begin{block}{Sentiment Analysis}
 
