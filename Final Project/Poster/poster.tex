@@ -1,6 +1,6 @@
 \documentclass[final]{beamer}
 
-\usepackage[scale=1]{beamerposter} % Use the beamerposter package for laying out the poster
+\usepackage[scale=0.9]{beamerposter} % Use the beamerposter package for laying out the poster
 
 \usetheme{confposter} % Use the confposter theme supplied with this template
 
@@ -38,6 +38,7 @@
 \usepackage{emoji} % Emoji :D
 
 \usepackage{subcaption} % 2 images side by side
+
 %-------------------------------------------s---------------------------------------------
 %	TITLE SECTION 
 %----------------------------------------------------------------------------------------
@@ -62,10 +63,7 @@
 %• make sure you cite every external code sources, datasets and papers you replicate/use (bibliography)
 %• if you want and make the code publicly available write the link in the poster or QR code for people to use
 
-
-\begin{center}
-•
-\end{center}\begin{document}
+\begin{document}
 
 \addtobeamertemplate{block end}{}{\vspace*{2exs}} % White space under blocks
 \addtobeamertemplate{block alerted end}{}{\vspace*{2ex}} % White space under highlighted (alert) blocks
@@ -99,7 +97,7 @@
 
     The motivation from this project lays in the recent doubts on media neutrality. People tend to distrust the media and call serious newspapers "fake news", whereas dubious newspapers gain popularity. So this project aims to provide the following:
     \begin{itemize}
-        \item provide a measure for biasness and tendentious media coverage
+        \item provide support to detect biaseness and tendious media coverage
         \item create transparency which newspapers tend to publish more tendentious articles
         \item initial notions towards an automated biasness detection in media coverage
     \end{itemize}
@@ -116,18 +114,7 @@
     Finally the results of both analysis were mapped and visualised in an interactive scatterplot. 
 \end{block}
     
-%----------------------------------------------------------------------------------------
 
-\end{column} % End of the first column
-
-\begin{column}{\sepwid}\end{column} % Empty spacer column
-
-\begin{column}{\onecolwid} % Begin a column which is two columns wide (column 2)
-
-
-%----------------------------------------------------------------------------------------
-%	MATERIALS
-%----------------------------------------------------------------------------------------
 
 \begin{block}{Data Extraction}
 
@@ -145,6 +132,15 @@
     The dataset was build only using the newspapers3k python package
 
 \end{block}
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of the first column
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\onecolwid} % Begin a column which is two columns wide (column 2)
+
+
 
 %----------------------------------------------------------------------------------------
 %	MATHEMATICAL SECTION
@@ -152,7 +148,7 @@
 
 \begin{block}{LDA Analysis}
 
-    The LDA (Latent Dirichlet Allocation) analysis aims to detect topics within all articles. We trained a model for each partition of the dataset. The dataset was partitioned based on a specific keyword (e.g. Trump) in order to have a meaningful filter. Otherwise the dataset would be too big to analyse each detected topic. This algorithm takes three \textit{hyperparameters}: number of topics, alpha and eta. All of these parameters were finetuned for each of the three trained models. The coherence score served as a measure for this assessment. \linebreak
+    The LDA (Latent Dirichlet Allocation)[1] analysis aims to detect topics within all articles. We trained a model for each partition of the dataset. The dataset was partitioned based on a specific keyword (e.g. Trump) in order to have a meaningful filter. Otherwise the dataset would be too big to analyse each detected topic. This algorithm takes three \textit{hyperparameters}: number of topics, alpha and eta. All of these parameters were finetuned for each of the three trained models. The coherence score served as a measure for this assessment. \linebreak
     
     \begin{table}    
     \begin{tabular}{c c c c}
@@ -179,8 +175,28 @@
     \begin{block}{Sentiment Analysis}
 
         Another way to search for is to analyse the sentiment which each newspaper looks at a topic.
-        With a help of a word dictionary quantifiyng the polatiy of each word, the polarity for each article has been calculated.\cite{vader}
+        The process of computationally identifying and categorizing opinions expressed in a piece of text, especially in order to determine whether the writer's attitude towards a particular topic, product, etc. is positive, negative, or neutral. \\
+        \textit{Valence Aware Dictionary for sEntiment Reasoning technique}[2] has been used to achieve this task.
 
+        \vspace{10mm}
+
+        Sentence1 = "\textit{In November, Al-Qahtani and 16 others were designated by the State Department under the Global Magnitsky Act along.}" \\
+        Sentence2 = "\textit{Congressman Adam Schiff, who spent two years knowingly and unlawfully lying and leaking, should be forced to resign from Congress!}" \\
+        Sentence3 = "\textit{Optimism that China and the United States will eventually hammer out a trade deal has helped global markets rack up huge gains so far this year}" \\
+        \vspace{10mm}
+
+        \begin{table}    
+            \begin{tabular}{l c c c}
+            \hline
+              & Positivity(pos) & Neutrality(neu) & Negativity(neg)  \\ [0.5ex]
+            \hline\hline
+            Sentence1 & 0.0 & 1.0 & 0.0 \\
+            Sentence2 & 0.0 & 0.652 & 0.348 \\
+            Sentence3  & 0.344 & 0.656 & 0.0 \\
+            \end{tabular}
+            \caption{Sentence Polarity}
+        \end{table}
+        
     \end{block}
 
 \end{column} % End of the first column
@@ -197,10 +213,10 @@
 \begin{block}{Trump}
 
 \begin{columns}[onlytextwidth]
-    \begin{column}{.45\textwidth}
+    \begin{column}{.4\textwidth}
         \includegraphics[width=0.8\linewidth]{poster/trump_11_reuters.png} 
     \end{column}
-    \begin{column}{.55\textwidth}
+    \begin{column}{.6\textwidth}
         This is an example plot of the analysis of a topic containing the keyword "Trump". The topic covers the investigation done by Robert Mueller regarding the involvement of russia in the presidential election in 2016. The news agency /textbf{reuters} apparently covered this topic in a slight negative manner, but still more or less balanced. Each point in the scatter represent an article, whereas the x-axis shows the negative score and the y-axis the positive score. In this framework a rather lower score on both axis means less usage of \textit{tendencious} words.
     \end{column}
 \end{columns}
@@ -211,14 +227,14 @@
 %	BREXIT
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Brexit {\emoji[windows]{1F1E7}}}
+\begin{block}{Brexit}
 
 
     \begin{columns}[onlytextwidth]
-        \begin{column}{.55\textwidth}
+        \begin{column}{.6\textwidth}
             This plot shows the coverage of the topic, that the brexit will impact the global trade. The newspaper \textbf{the times} covers this topic apparently more ambivalent. The sparse distribution of points suggest, that the coverage of the different articles have different tones.
         \end{column}
-        \begin{column}{.45\textwidth}
+        \begin{column}{.4\textwidth}
             \includegraphics[width=0.8\linewidth]{poster/brexit_5_thetimes.png} 
         \end{column}
     \end{columns}
@@ -274,7 +290,7 @@
 \end{block}
 
 
-\begin{block}{Future Work {\emoji[ios]{1F64F}}}
+\begin{block}{Future Work}
 
     As previously mentioned this project aims to set a staring framework for discusion on automated detection of bias. 
     As so there is much further work to be done, mainly on 5 different areas:
@@ -295,14 +311,23 @@
 %----------------------------------------------------------------------------------------
 
 \begin{block}{ {\emoji[ios]{1F4BB}}}
-    \begin{thebibliography}
+    \begin{thebibliography}{1}
+
+        \bibitem{LDA}
+          Blei, David M., Andrew Y. Ng, and Michael I. Jordan. 
+          \emph{Latent dirichlet allocation."},
+          Journal of machine Learning research 3,
+          Jan 2003
 
         \bibitem{vader}
           Hutto, C.J. and Gilbert, Eric,
           \emph{ A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text},
           Proceedings of the 8th International Conference on Weblogs and Social Media, ICWSM 2014,
           2015.
-    \end{thebibliography}
+        
+
+    
+        \end{thebibliography}
     \vspace{8mm}
     The project was possible with the great work done in the newspaper3k, nltk and gensim python libraries
 
