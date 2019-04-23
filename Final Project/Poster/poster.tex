@@ -85,7 +85,9 @@
 %----------------------------------------------------------------------------------------
 
 \begin{block}{Abstract}
-    This project contributes to the detection of fake news by analysing bias in english newspapers. These Articles are grouped by topic and been undertaken a sentiment analysis to detect the bias and tendencies within each article. It results in a visualization, which shows the media bias per newspaper, topic and keyword.
+    This project proposes a framework for the detection fake news by analysing bias in english newspapers.
+    The articles have been grouped by topic and analysed to detect the bias and tendencies.
+    It results in a visualization, which shows the media bias per newspaper, topic and keyword.
 \end{block}
 
 
@@ -93,9 +95,9 @@
 %	Motivation
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Motivation {\emoji[ios]{1F4AA}}}
+\begin{block}{Motivation}
 
-    The motivation from this project lays in the recent doubts on media neutrality. People tend to distrust the media and call serious newspapers "fake news", whereas dubious newspapers gain popularity. So this project aims to provide the following:
+    The motivation for this project lays in the recent doubts on media neutrality. People tend to distrust the media and call serious newspapers "fake news", whereas dubious newspapers gain popularity. So this project aims to provide the following:
     \begin{itemize}
         \item provide support to detect biaseness and tendious media coverage
         \item create transparency which newspapers tend to publish more tendentious articles
@@ -109,8 +111,8 @@
 %----------------------------------------------------------------------------------------
 
 \begin{block}{Methods}
-    The methodology followed in this project is as followed: As a first step data was aquiered from a \textbf{web scrapping} aproach from which news articles are downloaded from the web representations of various well-known newspapers. The data was limited to the politics section of each newspaper. It was tried to pick a balanced selection of different politically located newspapers through a qualitative assessment.
-    These articles were then filtered on keywords [e.g. "Trump", "Syria", "Brexit"] and been used to train a \textbf{LDA} model for topic detection. Simultaniously a \textbf{sentiment analysis} was carried out to measure the tendentious nature of each article. "A sentence on how it was done"
+    The methodology followed in this project is as followed: As a first step, data was acquired from a \textbf{web scrapping} aproach from which news articles are downloaded from the web representations of various well-known newspapers. The data was limited to the politics section of each newspaper. It was tried to pick a balanced selection of different politically located newspapers through a qualitative assessment.
+    These articles were then filtered on keywords [e.g. "Trump", "Syria", "Brexit"] and used to train a \textbf{LDA} model for topic detection. Simultaneously a \textbf{sentiment analysis} was carried out to measure the tendentious nature of each article. By calculating the amount of words frequently associated with negative and positive sentiments in each article.
     Finally the results of both analysis were mapped and visualised in an interactive scatterplot. 
 \end{block}
     
@@ -118,8 +120,8 @@
 
 \begin{block}{Data Extraction}
 
-    As a way to make the analysis relevant and up to date with the most current news topics
-    it has been developed a new news dataset with the following porperties
+    As a way to make the analysis relevant and up to date with the most current news topics,
+    it has been developed a new news dataset with the following properties:
 
     \begin{itemize}
         \item Built a dataset with over \textbf{70.000} news articles
@@ -129,7 +131,7 @@
 
     \hfill\includegraphics{log_extraction.png}\hspace*{\fill}
 
-    The dataset was build only using the newspapers3k python package
+    The dataset was build only using the newspapers3k python package.
 
 \end{block}
 %----------------------------------------------------------------------------------------
@@ -162,7 +164,7 @@
     \caption{Parameters for LDA models}
     \end{table}
     
-     The result of this analysis is a mapping for each article in order to make them comparable. Each topic is represented as a concatination of words assigned with a probability. In the example topic shown below one can understand by examining the words, that the topic is about Trump and the wall to mexico. \linebreak
+     The result of this analysis is a mapping for each article in order to make them comparable. Each topic is represented as a concatination of words assigned with a probability. In the example topic shown below one can understand by examining the words that the topic is about Trump and the wall to Mexico. \linebreak
      
      \textit{0.033*"border" + 0.016*"mexico" + 0.016*"trump" \\
     + 0.010*"immigration" + 0.008*"states" + 0.008*"united" \\
@@ -174,7 +176,7 @@
 
     \begin{block}{Sentiment Analysis}
 
-        Another way to search for is to analyse the sentiment which each newspaper looks at a topic.
+        Another way to search for bias is to analyse the sentiment which each newspaper looks at a topic.
         The process of computationally identifying and categorizing opinions expressed in a piece of text, especially in order to determine whether the writer's attitude towards a particular topic, product, etc. is positive, negative, or neutral. \\
         \textit{Valence Aware Dictionary for sEntiment Reasoning technique}[2] has been used to achieve this task.
 
@@ -182,7 +184,7 @@
 
         Sentence1 = "\textit{In November, Al-Qahtani and 16 others were designated by the State Department under the Global Magnitsky Act along.}" \\
         Sentence2 = "\textit{Congressman Adam Schiff, who spent two years knowingly and unlawfully lying and leaking, should be forced to resign from Congress!}" \\
-        Sentence3 = "\textit{Optimism that China and the United States will eventually hammer out a trade deal has helped global markets rack up huge gains so far this year}" \\
+        Sentence3 = "\textit{Optimism that China and the United States will eventually hammer out a trade deal has helped global markets rack up huge gains so far this year.}" \\
         \vspace{10mm}
 
         \begin{table}    
@@ -217,7 +219,7 @@
         \includegraphics[width=0.8\linewidth]{poster/trump_11_reuters.png} 
     \end{column}
     \begin{column}{.6\textwidth}
-        This is an example plot of the analysis of a topic containing the keyword "Trump". The topic covers the investigation done by Robert Mueller regarding the involvement of russia in the presidential election in 2016. The news agency /textbf{reuters} apparently covered this topic in a slight negative manner, but still more or less balanced. Each point in the scatter represent an article, whereas the x-axis shows the negative score and the y-axis the positive score. In this framework a rather lower score on both axis means less usage of \textit{tendencious} words.
+        This is an example plot of the analysis of a topic containing the keyword "Trump". The topic covers the investigation done by Robert Mueller regarding the involvement of Russia in the presidential election in 2016. The news agency \textbf{reuters} apparently covered this topic in a slight negative manner, but still more or less balanced. Each point in the scatter represent an article, whereas the x-axis shows the negative score and the y-axis the positive score. In this framework a rather lower score on both axis means less usage of \textit{tendencious} words.
     \end{column}
 \end{columns}
 
@@ -232,7 +234,7 @@
 
     \begin{columns}[onlytextwidth]
         \begin{column}{.6\textwidth}
-            This plot shows the coverage of the topic, that the brexit will impact the global trade. The newspaper \textbf{the times} covers this topic apparently more ambivalent. The sparse distribution of points suggest, that the coverage of the different articles have different tones.
+            This plot shows the coverage of the topic that the Brexit will impact the global trade. The newspaper \textbf{the times} covers this topic apparently more ambivalent. The sparse distribution of points suggest that the coverage of the different articles have different tones.
         \end{column}
         \begin{column}{.4\textwidth}
             \includegraphics[width=0.8\linewidth]{poster/brexit_5_thetimes.png} 
@@ -266,10 +268,9 @@
         \end{column}
 
         \begin{column}{.55\textwidth}
-            The two plots show how articles from the Al Jazeera and The Times newspapers compare to each other, on a positivity/negativity scale.
-            Both are measured on the topic 5 which contains as most frequent keywords:  \\
-            From this one could possibly infer that when Al Jazeera publishes on the topic, it takes more serious and possible more negative approach to it.\\
-            Never the less, these are only possible assumptions that the framework helps to clarify. Each article would be needed to be read in details to derive further conclusions
+            The two plots show how articles from the \textbf{al jazeera} and \textbf{the times} newspapers compare to each other, on a positivity/negativity scale.
+            From this, one could possibly infer that when Al Jazeera publishes on the topic, it takes a more serious and possible more negative approach to it.\\
+            Never the less, these are only possible assumptions that the framework helps to clarify. It would be needed to read each article in detail to derive further conclusions.
         \end{column}
     \end{columns}
 \end{block}
@@ -278,13 +279,13 @@
 %	FUTURE WORK & Conclusion
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Conclusion {\emoji[ios]{1F64F}}}
+\begin{block}{Conclusion}
     Measuring bias is a very subjective task. 
     Usually computers have a hard time executing subjective tasks. 
     The framework developed does not aim to automate bias detection but 
     rather to empower humans with summarization capabilites otherwise not possible.
     From the three example analysis above shown, it is possible to validate the usefullness of the framework proposed on a hard topic as bias detection.
-    As news generation gets automated, as is the case of fakenews(needs reference), the methods of flaging them also require modern digital frameworks.
+    As news generation gets automated, as is the case of fakenews, the methods of flaging them also require modern digital frameworks.
     This analysis and framework takes another step in this direction.
 
 \end{block}
@@ -292,7 +293,7 @@
 
 \begin{block}{Future Work}
 
-    As previously mentioned this project aims to set a staring framework for discusion on automated detection of bias. 
+    As previously mentioned this project aims to set a framework for discusion on automated detection of bias. 
     As so there is much further work to be done, mainly on 5 different areas:
 
     \begin{itemize}
@@ -310,7 +311,7 @@
 %	REPO
 %----------------------------------------------------------------------------------------
 
-\begin{block}{ {\emoji[ios]{1F4BB}}}
+\begin{block}{References}
     \begin{thebibliography}{1}
 
         \bibitem{LDA}
